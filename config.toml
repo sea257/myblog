@@ -1,0 +1,10 @@
+baseURL = "http://localhost:1313/"
+title   = "Sigberts Shack"
+theme   = "PaperMod"
+paginate = 0
+
+publishDir = "docs"
+
+[params] 
+	customCSS = ["css/custom.css"]
+
