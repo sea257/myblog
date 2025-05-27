@@ -2,17 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/posts/post-1/</loc>
+    <loc>https://sea257.github.io/myblog/posts/post-1/</loc>
     <lastmod>2025-05-25T22:05:50+02:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/</loc>
+    <loc>https://sea257.github.io/myblog/posts/</loc>
     <lastmod>2025-05-25T22:05:50+02:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://sea257.github.io/myblog/</loc>
     <lastmod>2025-05-25T22:05:50+02:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://sea257.github.io/myblog/categories/</loc>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://sea257.github.io/myblog/tags/</loc>
   </url>
 </urlset>
