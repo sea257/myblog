@@ -1,20 +1,2 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>Sigberts Shack</title>
-    <link>http://localhost:1313/myblog/</link>
-    <description>Recent content on Sigberts Shack</description>
-    <generator>Hugo -- 0.147.3</generator>
-    <language>en</language>
-    <lastBuildDate>Sun, 25 May 2025 22:05:50 +0200</lastBuildDate>
-    <atom:link href="http://localhost:1313/myblog/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Post 1</title>
-      <link>http://localhost:1313/myblog/posts/post-1/</link>
-      <pubDate>Sun, 25 May 2025 22:05:50 +0200</pubDate>
-      <guid>http://localhost:1313/myblog/posts/post-1/</guid>
-      <description>&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;http://localhost:1313/myblog/posts/post-1/Post1.jpg&#34;&gt;&lt;/p&gt;
-&lt;p&gt;In the soft hush of every humble dawn, embers flicker in cracked clay hearths, coaxing monolithic legends from dust-laced hollows of oblivion, where even the smallest spark can shatter the silence of unseen beginnings.&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Sigberts Shack</title><link>https://sea257.github.io/myblog/</link><description>Recent content on Sigberts Shack</description><generator>Hugo -- 0.147.3</generator><language>en</language><lastBuildDate>Sun, 25 May 2025 22:05:50 +0200</lastBuildDate><atom:link href="https://sea257.github.io/myblog/index.xml" rel="self" type="application/rss+xml"/><item><title>Post 1</title><link>https://sea257.github.io/myblog/posts/post-1/</link><pubDate>Sun, 25 May 2025 22:05:50 +0200</pubDate><guid>https://sea257.github.io/myblog/posts/post-1/</guid><description>&lt;p>&lt;img loading="lazy" src="https://sea257.github.io/myblog/posts/post-1/Post1.jpg">&lt;/p>
+&lt;p>In the soft hush of every humble dawn, embers flicker in cracked clay hearths, coaxing monolithic legends from dust-laced hollows of oblivion, where even the smallest spark can shatter the silence of unseen beginnings.&lt;/p></description></item></channel></rss>
