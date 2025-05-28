@@ -1,4 +1,6 @@
 baseURL = "https://sea257.github.io/myblog/"
+relativeURLs = false
+canonifyURLs = true
 title   = "Sigberts Shack"
 theme   = "PaperMod"
 paginate = 0

@@ -1,0 +1,43 @@
+{{ define "main" }}
+  <!-- Inline style overrides -->
+  <style>
+    /* 1) Enlarge the site title in the header */
+    header a:first-of-type {
+      font-size: 2rem !important;
+      font-weight: bold !important;
+    }
+
+    /* 2) Big “Posts” heading */
+    .posts-list > h1 {
+      font-size: 2rem !important;
+      margin-bottom: 1rem;
+      color: inherit;
+    }
+
+    /* 3) Half-size, blue, underlined date links */
+    .posts-list .post-list-item h2 a {
+      font-size: 1rem !important;
+      color: #0066cc !important;
+      text-decoration: underline !important;
+    }
+
+    /* 4) Tighten spacing around list items */
+    .posts-list .post-list-item {
+      margin-bottom: 0.5rem !important;
+    }
+  </style>
+
+  <section class="posts-list">
+    <!-- Static heading -->
+    <h1>Posts</h1>
+
+    <!-- Only render date links -->
+    {{ range sort .Site.RegularPages "Date" "desc" }}
+      <article class="post-list-item">
+        <h2>
+          <a href="{{ .Permalink }}">{{ .Date.Format "Jan 2, 2006" }}</a>
+        </h2>
+      </article>
+    {{ end }}
+  </section>
+{{ end }}

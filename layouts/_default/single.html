@@ -1,0 +1,28 @@
+{{ define "main" }}
+
+  <!-- Inline style overrides -->
+  <style>
+    header a:first-of-type { font-size: 2rem !important; }
+    .post-single > p:first-of-type a {
+      font-size: 1.25rem !important;
+      color: #0066cc;
+      text-decoration: underline;
+    }
+    .post-single > p:nth-of-type(3) {
+      font-size: 1.25rem !important;
+      font-weight: bold !important;
+      margin-top: 0.5rem !important;
+    }
+  </style>
+
+  <section class="post-single">
+    <!-- Back link -->
+    <p style="margin-bottom:1.5rem;">
+      <a href="{{ .Site.BaseURL }}" class="back-link">&lt; Back</a>
+    </p>
+
+    <!-- Here is where your post’s Markdown output goes -->
+    {{ .Content }}
+  </section>
+
+{{ end }}
