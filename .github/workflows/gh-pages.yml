@@ -1,5 +1,10 @@
 name: Build and deploy Hugo site
 
+# ── GRANT GITHUB_TOKEN write access to repo contents ─────────────
+permissions:
+  contents: write
+# ──────────────────────────────────────────────────────────────────
+
 on:
   push:
     branches:
