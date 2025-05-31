@@ -1,4 +1,3 @@
-cat << 'EOF' > .github/workflows/gh-pages.yml
 name: Build and deploy Hugo site
 
 on:
@@ -9,6 +8,7 @@ on:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -18,17 +18,17 @@ jobs:
       - name: Install Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: "latest"
+          hugo-version: 'latest'
           extended: true
 
       - name: Generate site
         run: |
           hugo --minify \
-               --destination docs
+            --cleanDestinationDir \
+            --destination docs
 
-      - name: Commit built files
-        uses: stefanzweifel/git-auto-commit-action@v4
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          commit_message: "chore: rebuild site via GitHub Actions"
-          file_pattern: docs/**
-EOF
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
