@@ -1,0 +1,18 @@
+{{- /* layouts/partials/head.html */ -}}
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ .Site.Title }}</title>
+
+  <!-- PaperMod’s built CSS -->
+  <link rel="stylesheet" href="{{ "css/common/main.css" | relURL }}" />
+  <link rel="stylesheet" href="{{ "css/common/header.css" | relURL }}" />
+  <link rel="stylesheet" href="{{ "css/common/post-single.css" | relURL }}" />
+
+  <!-- Custom overrides to match local styling -->
+  <link rel="stylesheet" href="{{ "css/custom.css" | relURL }}" />
+
+  <!-- Favicon & theme-color -->
+  <link rel="icon" href="{{ "favicon.ico" | relURL }}" />
+  <meta name="theme-color" content="#2e2e33" />
+</head>

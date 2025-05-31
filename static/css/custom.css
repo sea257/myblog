@@ -1,0 +1,24 @@
+/* static/css/custom.css */
+
+/* 1) Enlarge the site title in the header */
+header a:first-of-type {
+  font-size: 2rem !important;
+  font-weight: bold !important;
+}
+
+/* 2) Hide the “Posts” heading */
+.posts-list > h1 {
+  display: none !important;
+}
+
+/* 3) Style the date link */
+.posts-list .post-list-item h2 a {
+  font-size: 1rem !important;
+  color: #0066cc !important;
+  text-decoration: underline !important;
+}
+
+/* 4) Tighten spacing around list items */
+.posts-list .post-list-item {
+  margin-bottom: 0.5rem !important;
+}
