@@ -1,39 +1,42 @@
 name: Build and deploy Hugo site
 
-# ── GRANT GITHUB_TOKEN write access to repo contents ─────────────
-permissions:
-  contents: write
-# ──────────────────────────────────────────────────────────────────
-
 on:
   push:
     branches:
       - main
+
+permissions:
+  contents: write   # allow GH Actions to push back to main/docs
 
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Check out the repository
         uses: actions/checkout@v4
         with:
-          submodules: true
+          submodules: true   # if you’re using a theme as a submodule
 
-      - name: Install Hugo
+      - name: Install Hugo Extended
         uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: 'latest'
           extended: true
 
-      - name: Generate site
+      - name: Build site with Hugo
         run: |
           hugo --minify \
-            --cleanDestinationDir \
-            --destination docs
+            --destination docs \
+            --baseURL "https://sea257.github.io/myblog/"
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # This will push the contents of docs/ back to the main branch
           publish_dir: ./docs
+          publish_branch: main
+          # Force ‘main/docs’ to be overwritten
+          force_orphan: true
+          user_name: github-actions[bot]
+          user_email: github-actions[bot]@users.noreply.github.com
