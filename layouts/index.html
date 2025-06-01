@@ -1,30 +1,26 @@
 {{ define "main" }}
   <!-- 1) Inline style overrides (dark vs. light + layout) -->
   <style>
+    /* 1a) Make <body> a flex column so footer can “stick” */
     html, body {
       margin: 0;
       padding: 0;
-      /* 1a) Make body a flex column so footer can “stick” */
       display: flex;
       flex-direction: column;
       min-height: 100vh;
     }
 
-    /* 1b) Main content should grow to fill available space */
-    main {
-      flex: 1;
-    }
-
-    /* 1c) Base styles assume “dark mode” */
+    /* 1b) Base styles assume “dark mode” */
     body {
       background-color: #1d1e20 !important;
       color: #e0e0e0 !important;
     }
     a {
       color: #0066cc !important; /* link color in dark mode */
+      text-decoration: none !important;
     }
 
-    /* 1d) When <html> has class="light", switch to light background/text */
+    /* 1c) When <html> has class="light", switch to light background/text */
     html.light body {
       background-color: #ffffff !important;
       color: #111111 !important;
@@ -33,31 +29,40 @@
       color: #0055aa !important; /* links in light mode */
     }
 
-    /* 1e) Hide the built-in theme toggle button (if it exists) */
+    /* 1d) Hide the built-in Hugo/PaperMod theme toggle button (if present) */
     button#theme-toggle {
       display: none !important;
     }
 
-    /* 1f) Hide the “Go to Top” arrow entirely */
+    /* 1e) Hide the “Go to Top” arrow entirely */
     .top-link {
       display: none !important;
     }
 
-    /* 1g) Enlarge the site title in the header */
-    header a:first-of-type {
+    /* 1f) Center and style PaperMod’s built-in header */
+    header {
+      text-align: center;
+      margin: 1rem 0 0;
+    }
+    header a {
       font-size: 2rem !important;
       font-weight: bold !important;
+      color: #0066cc !important;
+      text-decoration: none !important;
     }
 
-    /* 1h) Make the default PaperMod footer smaller (75%) */
-    .footer {
-      font-size: 75% !important;
+    /* 1g) Container for centering “Toggle Theme” and posts-list under the header */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      width: 100%;
     }
 
-    /* 1i) Style for our “Toggle Theme” button */
+    /* 1h) “Toggle Theme” button left-aligned within container */
     #manual-theme-toggle {
       display: inline-block;
-      margin-bottom: 1rem;
+      margin: 0 0 0.5rem;
       padding: 0.3rem 0.6rem;
       font-size: 0.9rem;
       background-color: rgba(255,255,255,0.1);
@@ -71,14 +76,14 @@
       border-color: #ccc;
     }
 
-    /* 1j) Big “Posts” heading */
+    /* 1i) “Posts” heading styling */
     .posts-list > h1 {
       font-size: 2rem !important;
       margin-bottom: 1rem;
       color: inherit;
     }
 
-    /* 1k) Half-size, blue (or dark-blue in light mode), underlined date links */
+    /* 1j) Half-size, blue (or dark-blue in light mode), underlined date links */
     .posts-list .post-list-item h2 a {
       font-size: 1rem !important;
       text-decoration: underline !important;
@@ -88,33 +93,44 @@
       color: #0055aa !important; /* light-mode link */
     }
 
-    /* 1l) Tighten spacing around list items */
+    /* 1k) Tighten spacing around list items */
     .posts-list .post-list-item {
       margin-bottom: 0.5rem !important;
+    }
+
+    /* 1l) Shrink and center the default PaperMod footer */
+    .footer {
+      font-size: 75% !important;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      text-align: center;
     }
   </style>
 
   <!-- 2) “Toggle Theme” button + script to flip html.light -->
-  <button id="manual-theme-toggle">Toggle Theme</button>
+  <div class="container">
+    <button id="manual-theme-toggle">Toggle Theme</button>
+
+    <!-- 3) Main content (flex:1) -->
+    <section class="posts-list">
+      <!-- Static heading -->
+      <h1>Posts</h1>
+
+      <!-- Only render date links, newest first -->
+      {{ range sort .Site.RegularPages "Date" "desc" }}
+        <article class="post-list-item">
+          <h2>
+            <a href="{{ .Permalink }}">{{ .Date.Format "Jan 2, 2006" }}</a>
+          </h2>
+        </article>
+      {{ end }}
+    </section>
+  </div>
+
   <script>
     // Toggle the ‘light’ class on <html>
     document.getElementById('manual-theme-toggle').addEventListener('click', function() {
       document.documentElement.classList.toggle('light');
     });
   </script>
-
-  <!-- 3) Main content (flex:1) -->
-  <section class="posts-list">
-    <!-- Static heading -->
-    <h1>Posts</h1>
-
-    <!-- Only render date links, newest first -->
-    {{ range sort .Site.RegularPages "Date" "desc" }}
-      <article class="post-list-item">
-        <h2>
-          <a href="{{ .Permalink }}">{{ .Date.Format "Jan 2, 2006" }}</a>
-        </h2>
-      </article>
-    {{ end }}
-  </section>
 {{ end }}

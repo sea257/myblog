@@ -127,18 +127,13 @@
 <main class="main">
   
   <style>
+     
     html, body {
       margin: 0;
       padding: 0;
-       
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-    }
-
-     
-    main {
-      flex: 1;
     }
 
      
@@ -148,6 +143,7 @@
     }
     a {
       color: #0066cc !important;  
+      text-decoration: none !important;
     }
 
      
@@ -170,20 +166,29 @@
     }
 
      
-    header a:first-of-type {
+    header {
+      text-align: center;
+      margin: 1rem 0 0;
+    }
+    header a {
       font-size: 2rem !important;
       font-weight: bold !important;
+      color: #0066cc !important;
+      text-decoration: none !important;
     }
 
      
-    .footer {
-      font-size: 75% !important;
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      width: 100%;
     }
 
      
     #manual-theme-toggle {
       display: inline-block;
-      margin-bottom: 1rem;
+      margin: 0 0 0.5rem;
       padding: 0.3rem 0.6rem;
       font-size: 0.9rem;
       background-color: rgba(255,255,255,0.1);
@@ -218,31 +223,42 @@
     .posts-list .post-list-item {
       margin-bottom: 0.5rem !important;
     }
+
+     
+    .footer {
+      font-size: 75% !important;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      text-align: center;
+    }
   </style>
 
   
-  <button id="manual-theme-toggle">Toggle Theme</button>
+  <div class="container">
+    <button id="manual-theme-toggle">Toggle Theme</button>
+
+    
+    <section class="posts-list">
+      
+      <h1>Posts</h1>
+
+      
+      
+        <article class="post-list-item">
+          <h2>
+            <a href="https://sea257.github.io/myblog/posts/post-1/">May 25, 2025</a>
+          </h2>
+        </article>
+      
+    </section>
+  </div>
+
   <script>
     
     document.getElementById('manual-theme-toggle').addEventListener('click', function() {
       document.documentElement.classList.toggle('light');
     });
   </script>
-
-  
-  <section class="posts-list">
-    
-    <h1>Posts</h1>
-
-    
-    
-      <article class="post-list-item">
-        <h2>
-          <a href="https://sea257.github.io/myblog/posts/post-1/">May 25, 2025</a>
-        </h2>
-      </article>
-    
-  </section>
 
     </main>
     
