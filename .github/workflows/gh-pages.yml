@@ -1,27 +1,30 @@
 name: Build and deploy Hugo site
 
+# Grant GITHUB_TOKEN the rights to push to GitHub Pages:
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 on:
   push:
     branches:
       - main
-
-permissions:
-  contents: write   # allow GH Actions to push back to main/docs
 
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out the repository
+      - name: Check out repository
         uses: actions/checkout@v4
         with:
-          submodules: true   # if you’re using a theme as a submodule
+          submodules: true
 
       - name: Install Hugo Extended
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: 'latest'
+          hugo-version: "latest"
           extended: true
 
       - name: Build site with Hugo
@@ -33,10 +36,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          # This will push the contents of docs/ back to the main branch
+          # Tells the action where our generated files live:
           publish_dir: ./docs
-          publish_branch: main
-          # Force ‘main/docs’ to be overwritten
-          force_orphan: true
-          user_name: github-actions[bot]
-          user_email: github-actions[bot]@users.noreply.github.com
+          # Use the built-in GITHUB_TOKEN:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
