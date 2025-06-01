@@ -1,28 +1,135 @@
 {{ define "main" }}
-
-  <!-- Inline style overrides -->
+  <!-- Inline style overrides (dark vs. light + layout) -->
   <style>
-    header a:first-of-type { font-size: 2rem !important; }
-    .post-single > p:first-of-type a {
-      font-size: 1.25rem !important;
-      color: #0066cc;
-      text-decoration: underline;
+    /* 1a) Make <body> a flex column so footer can “stick” */
+    html, body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
-    .post-single > p:nth-of-type(3) {
-      font-size: 1.25rem !important;
+
+    /* 1b) Base styles assume “dark mode” */
+    body {
+      background-color: #1d1e20 !important;
+      color: #e0e0e0 !important;
+    }
+    a {
+      color: #0066cc !important; /* link color in dark mode */
+      text-decoration: none !important;
+    }
+
+    /* 1c) When <html> has class="light", switch to light background/text */
+    html.light body {
+      background-color: #ffffff !important;
+      color: #111111 !important;
+    }
+    html.light a {
+      color: #0055aa !important; /* links in light mode */
+    }
+
+    /* 1d) Hide the built-in Hugo/PaperMod theme toggle button (if present) */
+    button#theme-toggle {
+      display: none !important;
+    }
+
+    /* 1e) Hide the “Go to Top” arrow entirely */
+    .top-link {
+      display: none !important;
+    }
+
+    /* 1f) Center and style PaperMod’s built-in header */
+    header {
+      text-align: center;
+      margin: 1rem 0 0;
+    }
+    header a {
+      font-size: 2rem !important;
       font-weight: bold !important;
-      margin-top: 0.5rem !important;
+      color: #0066cc !important;
+      text-decoration: none !important;
+    }
+
+    /* 1g) Container for centering content (including image) under header */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      width: 100%;
+    }
+
+    /* 1h) “Toggle Theme” button left-aligned within container */
+    #manual-theme-toggle {
+      display: inline-block;
+      margin: 0 0 0.5rem;
+      padding: 0.3rem 0.6rem;
+      font-size: 0.9rem;
+      background-color: rgba(255,255,255,0.1);
+      border: 1px solid #888;
+      border-radius: 4px;
+      cursor: pointer;
+      color: inherit;
+    }
+    html.light #manual-theme-toggle {
+      background-color: rgba(0,0,0,0.05);
+      border-color: #ccc;
+    }
+
+    /* 1i) “Back” link, left-aligned under the toggle button */
+    .back-link {
+      text-align: left;
+      margin: 0 0 1rem;
+      font-size: 1.1rem;
+    }
+    .back-link a {
+      color: #0066cc !important;
+      text-decoration: underline !important;
+    }
+
+    /* 1j) Responsive scaling for post images */
+    .post-single img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto 1rem;
+    }
+
+    /* 1k) Make paragraph text under image larger and bold */
+    .post-single p {
+      font-size: 1.3rem;
+      font-weight: bold;
+      line-height: 1.4;
+    }
+
+    /* 1l) Shrink and center the default PaperMod footer */
+    .footer {
+      font-size: 75% !important;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      text-align: center;
     }
   </style>
 
-  <section class="post-single">
-    <!-- Back link -->
-    <p style="margin-bottom:1.5rem;">
-      <a href="{{ .Site.BaseURL }}" class="back-link">&lt; Back</a>
+  <div class="container">
+    <!-- “Toggle Theme” button (left-aligned) -->
+    <button id="manual-theme-toggle">Toggle Theme</button>
+
+    <!-- “Back” link (left-aligned) -->
+    <p class="back-link">
+      <a href="{{ .Site.BaseURL }}">&lt; Back</a>
     </p>
 
-    <!-- Here is where your post’s Markdown output goes -->
-    {{ .Content }}
-  </section>
+    <!-- Post content (image + text) -->
+    <section class="post-single">
+      {{ .Content }}
+    </section>
+  </div>
 
+  <script>
+    // Toggle the ‘light’ class on <html>
+    document.getElementById('manual-theme-toggle').addEventListener('click', function() {
+      document.documentElement.classList.toggle('light');
+    });
+  </script>
 {{ end }}

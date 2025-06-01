@@ -1,37 +1,114 @@
 {{ define "main" }}
-  <!-- Inline style overrides -->
+  <!-- 1) Inline style overrides (dark vs. light + layout) -->
   <style>
-    /* 1) Enlarge the site title in the header */
+    html, body {
+      margin: 0;
+      padding: 0;
+      /* 1a) Make body a flex column so footer can “stick” */
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* 1b) Main content should grow to fill available space */
+    main {
+      flex: 1;
+    }
+
+    /* 1c) Base styles assume “dark mode” */
+    body {
+      background-color: #1d1e20 !important;
+      color: #e0e0e0 !important;
+    }
+    a {
+      color: #0066cc !important; /* link color in dark mode */
+    }
+
+    /* 1d) When <html> has class="light", switch to light background/text */
+    html.light body {
+      background-color: #ffffff !important;
+      color: #111111 !important;
+    }
+    html.light a {
+      color: #0055aa !important; /* links in light mode */
+    }
+
+    /* 1e) Hide the built-in theme toggle button (if it exists) */
+    button#theme-toggle {
+      display: none !important;
+    }
+
+    /* 1f) Hide the “Go to Top” arrow entirely */
+    .top-link {
+      display: none !important;
+    }
+
+    /* 1g) Enlarge the site title in the header */
     header a:first-of-type {
       font-size: 2rem !important;
       font-weight: bold !important;
     }
 
-    /* 2) Big “Posts” heading */
+    /* 1h) Make the default PaperMod footer smaller (75%) */
+    .footer {
+      font-size: 75% !important;
+    }
+
+    /* 1i) Style for our “Toggle Theme” button */
+    #manual-theme-toggle {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.3rem 0.6rem;
+      font-size: 0.9rem;
+      background-color: rgba(255,255,255,0.1);
+      border: 1px solid #888;
+      border-radius: 4px;
+      cursor: pointer;
+      color: inherit;
+    }
+    html.light #manual-theme-toggle {
+      background-color: rgba(0,0,0,0.05);
+      border-color: #ccc;
+    }
+
+    /* 1j) Big “Posts” heading */
     .posts-list > h1 {
       font-size: 2rem !important;
       margin-bottom: 1rem;
       color: inherit;
     }
 
-    /* 3) Half-size, blue, underlined date links */
+    /* 1k) Half-size, blue (or dark-blue in light mode), underlined date links */
     .posts-list .post-list-item h2 a {
       font-size: 1rem !important;
-      color: #0066cc !important;
       text-decoration: underline !important;
+      color: #0066cc !important; /* dark-mode link */
+    }
+    html.light .posts-list .post-list-item h2 a {
+      color: #0055aa !important; /* light-mode link */
     }
 
-    /* 4) Tighten spacing around list items */
+    /* 1l) Tighten spacing around list items */
     .posts-list .post-list-item {
       margin-bottom: 0.5rem !important;
     }
   </style>
 
+  <!-- 2) “Toggle Theme” button + script to flip html.light -->
+  <button id="manual-theme-toggle">Toggle Theme</button>
+  <script>
+    // Toggle the ‘light’ class on <html>
+    document.getElementById('manual-theme-toggle').addEventListener('click', function() {
+      document.documentElement.classList.toggle('light');
+    });
+  </script>
+
+  <!-- 3) Main content (flex:1) -->
   <section class="posts-list">
     <!-- Static heading -->
     <h1>Posts</h1>
 
-    <!-- Only render date links -->
+    <!-- Only render date links, newest first -->
     {{ range sort .Site.RegularPages "Date" "desc" }}
       <article class="post-list-item">
         <h2>
